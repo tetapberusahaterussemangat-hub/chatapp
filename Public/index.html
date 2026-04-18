@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chat App</title>
+  <style>
+  body {
+    font-family: Arial;
+    background: #ece5dd;
+  }
+
+  #chat {
+    background: white;
+    height: 300px;
+    overflow-y: scroll;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  input {
+    padding: 8px;
+    margin: 5px;
+  }
+
+  button {
+    padding: 8px;
+    background: green;
+    color: white;
+    border: none;
+  }
+</style>
+</head>
+<body>
+
+<h2>Join Room</h2>
+<input id="roomInput" placeholder="Nama room">
+<h2>Login</h2>
+<input id="username" placeholder="Nama kamu">
+<input id="roomInput" placeholder="Nama room">
+<button onclick="joinRoom()">Join</button>
+
+<h3>Room Aktif:</h3>
+<ul id="roomList"></ul>
+
+<h3>Chat:</h3>
+<div id="chat"></div>
+
+<input id="messageInput" placeholder="Pesan">
+<button onclick="sendMessage()">Kirim</button>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io();
+  let currentRoom = "";
+
+  function joinRoom() {
+    const username = document.getElementById("username").value;
+    const room = document.getElementById("roomInput").value;
+
+    currentRoom = room;
+
+    socket.emit("joinRoom", { username, room });
+  }
+
+  function sendMessage() {
+    const message = document.getElementById("messageInput").value;
+    socket.emit("chatMessage", message);
+  }
+
+  socket.on("message", (msg) => {
+    document.getElementById("chat").innerHTML += "<p>" + msg + "</p>";
+  });
+
+  socket.on("roomList", (rooms) => {
+    const ul = document.getElementById("roomList");
+    ul.innerHTML = "";
+
+    for (let room in rooms) {
+      ul.innerHTML += `<li>${room} (${rooms[room]} user)</li>`;
+    }
+  });
+</script>
+
+</body>
+</html>
