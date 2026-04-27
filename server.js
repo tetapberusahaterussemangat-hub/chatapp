@@ -53,7 +53,7 @@ io.on("connection", (socket) => {
 const PORT = process.env.PORT || 3000;
 
 // 🔥 ini yang penting (biar HTML kebaca)
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
 
 // optional (biar aman kalau route lain)
 app.get('/', (req, res) => {
