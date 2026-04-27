@@ -50,8 +50,15 @@ io.on("connection", (socket) => {
   });
 });
 
+const express = require('express');
+const app = express();
+
 const PORT = process.env.PORT || 3000;
 
-server.listen(PORT, () => {
+app.get('/', (req, res) => {
+  res.send('Server jalan di Render');
+});
+
+app.listen(PORT, () => {
   console.log("Server jalan");
 });
