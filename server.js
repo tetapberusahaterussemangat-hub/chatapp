@@ -50,14 +50,6 @@ io.on("connection", (socket) => {
   });
 });
 
-
-
-const PORT = process.env.PORT || 3000;
-
-app.get('/', (req, res) => {
-  res.send('Server jalan di Render');
-});
-
-app.listen(PORT, () => {
-  console.log("Server jalan");
+server.listen(3000, () => {
+  console.log("Server jalan di http://localhost:3000");
 });
