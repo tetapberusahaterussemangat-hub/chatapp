@@ -2,8 +2,6 @@ const express = require("express");
 const http = require("http");
 const { Server } = require("socket.io");
 
-//const path = require('path');
-
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
@@ -52,16 +50,10 @@ io.on("connection", (socket) => {
   });
 });
 
-// biar bisa baca file static (frontend)
-//app.use(express.static(path.join(__dirname, 'public')));
 
-// route utama
-//app.get('/', (req, res) => {
-//  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-//});
 
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log(`Server jalan di port ${PORT}`);
+  console.log("Server jalan");
 });
