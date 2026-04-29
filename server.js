@@ -57,3 +57,7 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log("Server jalan");
 });
+
+app.get('/', (req, res) => {
+  res.send('Server jalan di Render');
+});
